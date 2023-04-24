@@ -32,10 +32,6 @@ const Modal: React.FC<ModalProps> = ({
 }) => {
 	const [showModal, setShowModal] = useState(isOpen);
 
-	useEffect(() => {
-		setShowModal(isOpen);
-	}, [isOpen]);
-
 	const handleClose = useCallback(() => {
 		if (disabled) {
 			return;
@@ -62,6 +58,25 @@ const Modal: React.FC<ModalProps> = ({
 
 		secondaryAction();
 	}, [disabled, secondaryAction]);
+
+	const handleKeyDown = useCallback((event: any) => {
+		if (event.key === "Escape") {
+			handleClose();
+		}
+
+		return;
+	}, [handleClose]);
+
+	useEffect(() => {
+		setShowModal(isOpen);
+	}, [isOpen]);
+
+	useEffect(() => {
+		document.body.addEventListener("keydown", handleKeyDown);
+		return () => {
+			document.body.removeEventListener("keydown", handleKeyDown);
+		};
+	}, [handleKeyDown]);
 
 	if (!isOpen) return null;
 

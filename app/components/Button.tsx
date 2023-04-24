@@ -24,7 +24,7 @@ const Button: React.FC<ButtonProps> = ({
 			type="button"
 			className={`relative rounded-lg transition w-full hover:opacity-80 disabled:opacity-70 disabled:cursor-not-allowed border-gray-900 
 			${outline ? "bg-white" : "bg-gray-900"}
-			${outline ? "text-gray-800" : "text-white"}
+			${outline ? "text-gray-900" : "text-white"}
 			${small ? "py-1" : "py-3"}
 			${small ? "text-sm" : "text-md"}
 			${small ? "font-light" : "font-semibold"}

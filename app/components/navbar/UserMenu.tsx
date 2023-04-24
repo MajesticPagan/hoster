@@ -7,6 +7,7 @@ import { signOut } from "next-auth/react";
 
 import useRegisterModal from "@/app/hooks/use-register-modal";
 import useLoginModal from "@/app/hooks/use-login-modal";
+import useRentModal from "@/app/hooks/use-rent-modal";
 
 import Avatar from "../Avatar";
 import MenuItem from "./MenuItem";
@@ -18,18 +19,28 @@ interface UserMenuProps {
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 	const registerModal = useRegisterModal();
 	const loginModal = useLoginModal();
+	const rentModal = useRentModal();
+
 	const [isOpen, setIsOpen] = useState(false);
 
 	const handleToggleOpen = useCallback(() => {
 		setIsOpen((currentState) => !currentState);
 	}, []);
 
+	const handleOnRent = useCallback(() => {
+		if (!currentUser) {
+			return loginModal.onOpen();
+		}
+		
+		rentModal.onOpen();
+	}, [currentUser, loginModal, rentModal]);
+
 	return (
 		<div className="relative">
 			<div className="flex flex-row items-center gap-3">
 				<div
 					className="hidden md:block text-sm font-semibol py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
-					onClick={() => {}}
+					onClick={handleOnRent}
 				>
 					Receba com Hoster
 				</div>
@@ -53,7 +64,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 								<MenuItem onClick={() => {}} label="Os meus favoritos" />
 								<MenuItem onClick={() => {}} label="As minhas reservas" />
 								<MenuItem onClick={() => {}} label="As minhas casas" />
-								<MenuItem onClick={() => {}} label="Receber com Hoster" />
+								<MenuItem onClick={rentModal.onOpen} label="Receber com Hoster" />
 								<hr />
 								<MenuItem onClick={() => signOut()} label="Terminar sessão" />
 							</>

@@ -53,6 +53,11 @@ const LoginModal = () => {
 		});
 	};
 
+	const toggleModal = useCallback(() => {
+		loginModal.onClose();
+		registerModal.onOpen();
+	}, [loginModal, registerModal]);
+
 	const bodyContent = (
 		<div className="flex flex-col gap-4">
 			<Heading title="Bem vindo de volta" subtitle="Inicie a sessão com a sua conta" center />
@@ -97,7 +102,7 @@ const LoginModal = () => {
 					<div>Não possui uma conta?</div>
 					<div
 						className="text-neutral-800 cursor-pointer hover:underline"
-						onClick={registerModal.onClose}
+						onClick={toggleModal}
 					>
 						Registe uma conta
 					</div>
