@@ -3,6 +3,7 @@ import Navbar from "./components/navbar/Navbar";
 import RegisterModal from "./components/modals/RegisterModal";
 import LoginModal from "./components/modals/LoginModal";
 import RentModal from "./components/modals/RentModal";
+import SearchModal from "./components/modals/SearchModal";
 import ToasterProvider from "./components/providers/ToasterProvider";
 
 import getCurrentUser from "./actions/getCurrentUser";
@@ -30,6 +31,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
 					<RegisterModal />
 					<LoginModal />
 					<RentModal />
+					<SearchModal />
 					<ToasterProvider />
 				</ClientOnly>
 				<div className="pb-20 pt-28">{children}</div>

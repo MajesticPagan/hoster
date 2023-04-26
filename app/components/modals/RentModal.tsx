@@ -77,11 +77,11 @@ const RentModal = () => {
 	}, [location]);
 
 	const onPrev = () => {
-		setStep((currentValue) => currentValue - 1);
+		setStep((currentState) => currentState - 1);
 	};
 
 	const onNext = () => {
-		setStep((currentValue) => currentValue + 1);
+		setStep((currentState) => currentState + 1);
 	};
 
 	const onSubmit: SubmitHandler<FieldValues> = (data) => {

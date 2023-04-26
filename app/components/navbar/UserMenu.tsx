@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { SafeUser } from "@/app/types";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 import useRegisterModal from "@/app/hooks/use-register-modal";
 import useLoginModal from "@/app/hooks/use-login-modal";
@@ -17,6 +18,8 @@ interface UserMenuProps {
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
+	const router = useRouter();
+
 	const registerModal = useRegisterModal();
 	const loginModal = useLoginModal();
 	const rentModal = useRentModal();
@@ -31,7 +34,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 		if (!currentUser) {
 			return loginModal.onOpen();
 		}
-		
+
 		rentModal.onOpen();
 	}, [currentUser, loginModal, rentModal]);
 
@@ -60,10 +63,22 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 					<div className="flex flex-col cursor-pointer">
 						{currentUser ? (
 							<>
-								<MenuItem onClick={() => {}} label="As minhas viagens" />
-								<MenuItem onClick={() => {}} label="Os meus favoritos" />
-								<MenuItem onClick={() => {}} label="As minhas reservas" />
-								<MenuItem onClick={() => {}} label="As minhas casas" />
+								<MenuItem
+									onClick={() => router.push("/trips")}
+									label="As minhas viagens"
+								/>
+								<MenuItem
+									onClick={() => router.push("/favorites")}
+									label="Os meus favoritos"
+								/>
+								<MenuItem
+									onClick={() => router.push("/reservations")}
+									label="As minhas reservas"
+								/>
+								<MenuItem
+									onClick={() => router.push("/homes")}
+									label="As minhas casas"
+								/>
 								<MenuItem onClick={rentModal.onOpen} label="Receber com Hoster" />
 								<hr />
 								<MenuItem onClick={() => signOut()} label="Terminar sessão" />

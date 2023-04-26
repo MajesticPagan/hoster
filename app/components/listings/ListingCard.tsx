@@ -1,7 +1,6 @@
 "use client";
 
-import { Listing, Reservation } from "@prisma/client";
-import { SafeUser, SafeListing } from "@/app/types";
+import { SafeUser, SafeListing, SafeReservation } from "@/app/types";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { format } from "date-fns";
@@ -14,7 +13,7 @@ import Button from "../Button";
 
 interface ListingCardProps {
 	data: SafeListing;
-	reservation?: Reservation;
+	reservation?: SafeReservation;
 	currentUser?: SafeUser | null;
 	disabled?: boolean;
 	actionLabel?: string;
@@ -52,7 +51,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
 		const start = new Date(reservation.startDate);
 		const end = new Date(reservation.endDate);
 
-		return `${format(start, "PP")} = ${format(end, "PP")}`;
+		return `${format(start, "PP")} - ${format(end, "PP")}`;
 	}, [reservation]);
 
 	const handleCancel = useCallback(
@@ -74,7 +73,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
 
 	return (
 		<div className="col-span-1 cursor-pointer group" onClick={handleCardClick}>
-			<div className="flex flex-col w-full">
+			<div className="flex flex-col w-full gap-2">
 				<div className="aspect-square w-full relative overflow-hidden rounded-xl">
 					<Image
 						className="object-cover w-full h-full group-hover:scale-110 transition"
@@ -86,13 +85,13 @@ const ListingCard: React.FC<ListingCardProps> = ({
 						<HeartButton listingId={data.id} currentUser={currentUser} />
 					</div>
 				</div>
-				<div className="font-semibod text-lg mt-3">
+				<div className="font-semibod text-lg mt-1">
 					{location?.label}, {location?.region}
 				</div>
-				<div className="font-light text-neutral-500">
+				<div className="font-light text-neutral-500 -mt-1">
 					{reservationDate || data.category}
 				</div>
-				<div className="flex flex-row items-center gap-1 mt-2">
+				<div className="flex flex-row items-center gap-1">
 					<div className="font-semibold">€ {price}</div>
 					{!reservation && <div className="font-light">/ noite</div>}
 				</div>
