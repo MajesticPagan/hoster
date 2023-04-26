@@ -8,7 +8,7 @@ interface ErrorStateProps {
 	error: Error;
 }
 
-const Error: React.FC<ErrorStateProps> = ({ error }) => {
+const Error: React.FC<ErrorStateProps> = ({ error = null }) => {
 	useEffect(() => {
 		console.error(error);
 	}, [error]);
