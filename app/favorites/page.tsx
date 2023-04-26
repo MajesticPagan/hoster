@@ -5,6 +5,10 @@ import ClientOnly from "../components/ClientOnly";
 import EmptyState from "../components/EmptyState";
 import FavoritesClient from "./FavoritesClient";
 
+export const metadata = {
+	title: "Os meus favoritos | Hoster",
+};
+
 const FavoritesPage = async () => {
 	const currentUser = await getCurrentUser();
 	const listings = await getFavoriteListings();

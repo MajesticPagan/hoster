@@ -5,6 +5,10 @@ import ClientOnly from "../components/ClientOnly";
 import EmptyState from "../components/EmptyState";
 import HomesClient from "./HomesClient";
 
+export const metadata = {
+	title: "As minhas casas | Hoster",
+};
+
 const HomesPage = async () => {
 	const currentUser = await getCurrentUser();
 

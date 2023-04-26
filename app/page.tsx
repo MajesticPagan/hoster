@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import getListings, { IListingParams } from "./actions/getListings";
 import getCurrentUser from "./actions/getCurrentUser";
 
@@ -10,7 +12,7 @@ interface HomeProps {
 	searchParams: IListingParams;
 }
 
-const Home = async ({ searchParams = {} }: HomeProps) => {
+const Home = async ({ searchParams }: HomeProps) => {
 	const listings = await getListings(searchParams);
 	const currentUser = await getCurrentUser();
 

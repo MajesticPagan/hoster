@@ -5,6 +5,10 @@ import ClientOnly from "../components/ClientOnly";
 import EmptyState from "../components/EmptyState";
 import TripsClient from "./TripsClient";
 
+export const metadata = {
+	title: "As minhas viagens | Hoster",
+};
+
 const TripsPage = async () => {
 	const currentUser = await getCurrentUser();
 

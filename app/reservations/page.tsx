@@ -5,6 +5,10 @@ import EmptyState from "../components/EmptyState";
 import ClientOnly from "../components/ClientOnly";
 import ReservationsClient from "./ReservationsClient";
 
+export const metadata = {
+	title: "As minhas reservas | Hoster",
+};
+
 const ReservationsPage = async () => {
 	const currentUser = await getCurrentUser();
 
